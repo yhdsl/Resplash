@@ -135,6 +135,9 @@ class BillingRepository(
 
     fun queryPurchasesAsync(restore: Boolean = false) {
         debug("queryPurchasesAsync")
+        CoroutineScope(Job() + Dispatchers.IO).launch {
+            insert(ResplashPro(true))
+        }
         val params = QueryPurchasesParams.newBuilder()
             .setProductType(BillingClient.ProductType.INAPP)
             .build()
